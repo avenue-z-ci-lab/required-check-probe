@@ -1,0 +1,21 @@
+# baseline: work passes, ci is the template aggregate
+name: ci
+on: pull_request
+permissions:
+  contents: read
+jobs:
+  work:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: exit 0
+  ci:
+    needs: [work]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: verdict
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: jq -e 'length > 0 and all(.[]; .result == "success")' <<<"${NEEDS}"
