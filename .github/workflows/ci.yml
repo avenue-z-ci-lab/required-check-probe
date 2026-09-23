@@ -1,4 +1,4 @@
-# baseline: work passes, ci is the template aggregate
+# A0 control: work passes, ci has if: always()
 name: ci
 on: pull_request
 permissions:
