@@ -1,4 +1,4 @@
-# baseline: work passes, ci is the template aggregate
+# A2: work FAILS, ci has if: always()
 name: ci
 on: pull_request
 permissions:
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - run: exit 0
+      - run: exit 1
   ci:
     needs: [work]
     if: always()
