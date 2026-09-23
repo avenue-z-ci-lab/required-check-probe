@@ -1,4 +1,4 @@
-# baseline: work passes, ci is the template aggregate
+# A3: work passes, ci skipped by its own if:
 name: ci
 on: pull_request
 permissions:
@@ -11,7 +11,7 @@ jobs:
       - run: exit 0
   ci:
     needs: [work]
-    if: always()
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
